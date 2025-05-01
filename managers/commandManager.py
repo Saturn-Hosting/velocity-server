@@ -5,6 +5,7 @@ from commands.message import MessageCommand
 from commands.image import ImageCommand
 from commands.private_message import PrivateMessageCommand
 from commands.ping import PingCommand
+from commands.fetch import FetchCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
@@ -14,7 +15,8 @@ class CommandManager:
             'MSG': MessageCommand(),
             'IMAGE': ImageCommand(),
             'PRIVMSG':  PrivateMessageCommand(),
-            'PING': PingCommand()
+            'PING': PingCommand(),
+            'FETCH': FetchCommand()
         }
 
     def handle(self, client, message):

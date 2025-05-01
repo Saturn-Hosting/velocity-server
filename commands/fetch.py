@@ -1,7 +1,7 @@
 from .command import Command
 import managers.db as db
 
-class MessageCommand(Command):
+class FetchCommand(Command):
     desired_args = 1
 
     def execute(self, client, args):
