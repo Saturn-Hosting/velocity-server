@@ -1,6 +1,7 @@
 from managers.config import credentials, clients
 from .command import Command
 from managers.clientUtils import *
+import managers.db as db
 
 class MessageCommand(Command):
     desired_args = -1
@@ -17,5 +18,6 @@ class MessageCommand(Command):
         message = " ".join(args)
         broadcast_msg = f"MSG {client.username} {message}"
         broadcast(broadcast_msg, client)
+        db.add_message(client.id, message)
 
 

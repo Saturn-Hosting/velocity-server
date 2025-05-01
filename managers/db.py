@@ -65,6 +65,16 @@ def add_message(sender_id, message):
     conn.commit()
     conn.close()
 
+def add_private_message(sender_id, receiver_id, message):
+    conn = sqlite3.connect('velocity.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO privatemessages (sender_id, receiver_id, message)
+        VALUES (?, ?, ?)
+    ''', (sender_id, receiver_id, message))
+    conn.commit()
+    conn.close()
+
 def verify_password(username, password):
     user = get_user(username)
     if user:

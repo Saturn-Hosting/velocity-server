@@ -1,16 +1,18 @@
 from managers.config import credentials
 from .command import Command
+import managers.db as db
 
 class LoginCommand(Command):
     desired_args = 2
     
     def execute(self, client, args):
         username, password = args
-        if username not in credentials:
+        user = db.get_user(username)
+        if not user:
             client.send("ERR_INVALIDCREDENTIALS\n")
             return
 
-        if password != credentials[username]:
+        if db.verify_password(username, password) is False:
             client.send("ERR_INVALIDCREDENTIALS\n")
             return
 
@@ -18,3 +20,4 @@ class LoginCommand(Command):
             client.username = username
             client.send("CONFIRM_LOGIN\n")
             client.logged_in = True
+            client.id = user.id

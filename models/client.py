@@ -5,10 +5,11 @@ from managers.commandManager import CommandManager
 command_manager = CommandManager()
 
 class Client:
-    def __init__(self, conn, addr):
+    def __init__(self, conn, addr, id=None):
         self.conn = conn
         self.addr = addr
         self.logged_in = False
+        self.id = id
         self.username = None
 
     def send(self, message):
@@ -35,8 +36,6 @@ class Client:
             if not message:
                 break
             command_manager.handle(self, message)
-
-        self.send("MOTD hello world\n")
 
         while True:
             message = self.receive()
