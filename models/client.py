@@ -1,5 +1,8 @@
-from managers.config import *
-from managers.clientUtils import *
+from managers.config import config
+from managers.clientUtils import broadcast, remove
+from managers.commandManager import CommandManager
+
+command_manager = CommandManager()
 
 class Client:
     def __init__(self, conn, addr):
@@ -27,39 +30,18 @@ class Client:
         self.send(f"{config['motd']}\n")
         
         while not self.logged_in:
-            try:
-                message = self.receive()
-                if not message:
-                    break
-                if message.startswith("REGISTER"):
-                    parts = message.split()
-                    if len(parts) == 3:
-                        username, password = parts[1], parts[2]
-                        if username in credentials:
-                            self.send("ERR_ALREADYREGISTRED\n")
-                        else:
-                            credentials[username] = password
-                            self.send("CONFIRM_REGISTER\n")
-                            self.logged_in = True
-                    else:
-                        self.send("ERR_TOOMANYPARAMS\n")
-                else:
-                    self.send("ERR_INVALIDCMD\n")
-            except Exception as e:
-                print(f"Error: {e}")
+            message = self.receive()
+            if not message:
                 break
+            command_manager.handle(self, message)
 
         self.send("MOTD hello world\n")
 
         while True:
-            try:
-                message = self.receive()
-                if message:
-                    print(f"<{self.addr[0]}> {message}")
-                    broadcast(message, self)
-                else:
-                    remove(self)
-                    break
-            except Exception as e:
-                print(f"Error: {e}")
+            message = self.receive()
+            if message:
+                print(f"<{self.addr[0]}> {message}")
+                broadcast(message, self)
+            else:
+                remove(self)
                 break

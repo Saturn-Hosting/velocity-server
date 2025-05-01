@@ -1,0 +1,23 @@
+from commands.command import Command
+from commands.register import RegisterCommand
+
+class CommandManager:
+    def __init__(self): #breaks without the dumb __ shit
+        self.commands = {
+            'REGISTER': RegisterCommand(),
+        }
+
+    def handle(self, client, message):
+        parts = message.split()
+        if not parts:
+            client.send("ERR_INVALIDCMD\n")
+            return
+
+        cmd_name = parts[0].upper()
+        args = parts[1:]
+
+        command = self.commands.get(cmd_name)
+        if command:
+            command.execute(client, args)
+        else:
+            client.send("ERR_INVALIDCMD\n")
