@@ -54,6 +54,12 @@ ERR_NOSUCHUSER
 
 s2c receiving a dm
 PRIVMSG sender :hello world
+
+c2s fetching 10 messages from the index 50
+FETCH 50
+
+s2c receiving a fetched message
+FETCH timestamp username :message
 ```
 
 **Images**

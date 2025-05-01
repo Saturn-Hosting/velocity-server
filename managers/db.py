@@ -105,3 +105,13 @@ def fetch_private_messages(sender_id, receiver_id, start_index):
     messages = cursor.fetchall()
     conn.close()
     return messages
+
+def get_user_by_id(user_id):
+    conn = sqlite3.connect('velocity.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT * FROM users WHERE id = ?
+    ''', (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+    return user

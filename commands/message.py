@@ -1,4 +1,4 @@
-from managers.config import credentials, clients
+from managers.config import clients
 from .command import Command
 from managers.clientUtils import *
 import managers.db as db
