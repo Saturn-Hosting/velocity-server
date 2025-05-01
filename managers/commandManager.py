@@ -4,6 +4,7 @@ from commands.login import LoginCommand
 from commands.message import MessageCommand
 from commands.image import ImageCommand
 from commands.private_message import PrivateMessageCommand
+from commands.ping import PingCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
@@ -13,6 +14,7 @@ class CommandManager:
             'MSG': MessageCommand(),
             'IMAGE': ImageCommand(),
             'PRIVMSG':  PrivateMessageCommand(),
+            'PING': PingCommand()
         }
 
     def handle(self, client, message):
@@ -26,7 +28,7 @@ class CommandManager:
 
         command = self.commands.get(cmd_name)
         if command:
-            if len(args) != command.desired_args & len(args) != -1:
+            if len(args) != command.desired_args and len(args) != -1:
                 if(len(args) > command.desired_args): client.send("ERR_TOOMANYPARAMS\n")
                 else: client.send("ERR_NEEDMOREPARAMS\n")
                 return
