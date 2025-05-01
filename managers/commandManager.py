@@ -1,12 +1,14 @@
 from commands.command import Command
 from commands.register import RegisterCommand
 from commands.login import LoginCommand
+from commands.message import MessageCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
         self.commands = {
             'REGISTER': RegisterCommand(),
             'LOGIN': LoginCommand(),
+            'MSG': MessageCommand(),
         }
 
     def handle(self, client, message):
@@ -20,7 +22,7 @@ class CommandManager:
 
         command = self.commands.get(cmd_name)
         if command:
-            if len(args) != command.desired_args:
+            if len(args) != command.desired_args & len(args) != -1:
                 if(len(args) > command.desired_args): client.send("ERR_TOOMANYPARAMS\n")
                 else: client.send("ERR_NEEDMOREPARAMS\n")
                 return

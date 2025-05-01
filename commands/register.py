@@ -11,4 +11,5 @@ class RegisterCommand(Command):
         else:
             credentials[username] = password
             client.send("CONFIRM_REGISTER\n")
+            client.username = username
             client.logged_in = True

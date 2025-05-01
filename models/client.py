@@ -9,6 +9,7 @@ class Client:
         self.conn = conn
         self.addr = addr
         self.logged_in = False
+        self.username = None
 
     def send(self, message):
         try:
@@ -41,7 +42,7 @@ class Client:
             message = self.receive()
             if message:
                 print(f"<{self.addr[0]}> {message}")
-                broadcast(message, self)
+                command_manager.handle(self, message)
             else:
                 remove(self)
                 break

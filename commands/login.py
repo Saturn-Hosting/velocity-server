@@ -15,5 +15,6 @@ class LoginCommand(Command):
             return
 
         else:
+            client.username = username
             client.send("CONFIRM_LOGIN\n")
             client.logged_in = True
