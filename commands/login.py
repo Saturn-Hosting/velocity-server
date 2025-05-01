@@ -8,9 +8,14 @@ class LoginCommand(Command):
             return
         
         username, password = args
-        if username in credentials:
-            client.send("ERR_ALREADYREGISTRED\n")
+        if username not in credentials:
+            client.send("ERR_INVALIDCREDENTIALS\n")
+            return
+
+        if password != credentials[username]:
+            client.send("ERR_INVALIDCREDENTIALS\n")
+            return
+            
         else:
-            credentials[username] = password
             client.send("CONFIRM_LOGIN\n")
             client.logged_in = True

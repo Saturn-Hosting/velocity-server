@@ -1,10 +1,12 @@
 from commands.command import Command
 from commands.register import RegisterCommand
+from commands.login import LoginCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
         self.commands = {
             'REGISTER': RegisterCommand(),
+            'LOGIN': LoginCommand(),
         }
 
     def handle(self, client, message):
