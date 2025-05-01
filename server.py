@@ -2,12 +2,14 @@ import socket
 from _thread import *
 from models.client import Client
 from managers.config import *
+import managers.db as db
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 server.bind((config['host'], config['port']))
 server.listen(100)
+db.migrate()
 
 while True:
     conn, addr = server.accept()
