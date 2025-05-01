@@ -10,6 +10,10 @@ class MessageCommand(Command):
             client.send("ERR_NOAUTH")
             return
 
+        if len(args) < 2:
+            client.send("ERR_NEEDMOREPARAMS")
+            return
+
         message = " ".join(args)
         broadcast_msg = f"MSG {client.username} {message}"
         broadcast(broadcast_msg, client)

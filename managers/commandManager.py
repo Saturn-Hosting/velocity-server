@@ -3,6 +3,7 @@ from commands.register import RegisterCommand
 from commands.login import LoginCommand
 from commands.message import MessageCommand
 from commands.image import ImageCommand
+from commands.private_message import PrivateMessageCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
@@ -11,6 +12,7 @@ class CommandManager:
             'LOGIN': LoginCommand(),
             'MSG': MessageCommand(),
             'IMAGE': ImageCommand(),
+            'PRIVMSG':  PrivateMessageCommand(),
         }
 
     def handle(self, client, message):
