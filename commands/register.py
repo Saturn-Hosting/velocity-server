@@ -1,4 +1,3 @@
-from managers.config import credentials
 from .command import Command
 import managers.db as db
 
