@@ -20,6 +20,10 @@ class CommandManager:
 
         command = self.commands.get(cmd_name)
         if command:
-            command.execute(client, args)
+            if len(args) != command.desired_args:
+                if(len(args) > command.desired_args): client.send("ERR_TOOMANYPARAMS\n")
+                else: client.send("ERR_NEEDMOREPARAMS\n")
+                return
+            else: command.execute(client, args)
         else:
             client.send("ERR_INVALIDCMD\n")

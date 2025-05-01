@@ -2,11 +2,9 @@ from managers.config import credentials
 from .command import Command
 
 class RegisterCommand(Command):
-    def execute(self, client, args):
-        if len(args) != 2:
-            client.send("ERR_TOOMANYPARAMS\n")
-            return
-        
+    desired_args = 2
+
+    def execute(self, client, args):        
         username, password = args
         if username in credentials:
             client.send("ERR_ALREADYREGISTRED\n")
