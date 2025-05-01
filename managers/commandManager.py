@@ -2,6 +2,7 @@ from commands.command import Command
 from commands.register import RegisterCommand
 from commands.login import LoginCommand
 from commands.message import MessageCommand
+from commands.image import ImageCommand
 
 class CommandManager:
     def __init__(self): #breaks without the dumb __ shit
@@ -9,6 +10,7 @@ class CommandManager:
             'REGISTER': RegisterCommand(),
             'LOGIN': LoginCommand(),
             'MSG': MessageCommand(),
+            'IMAGE': ImageCommand(),
         }
 
     def handle(self, client, message):
