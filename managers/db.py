@@ -47,13 +47,14 @@ def add_user(username, password):
 
 def get_user(username):
     conn = sqlite3.connect('velocity.db')
+    conn.row_factory = sqlite3.Row  
     cursor = conn.cursor()
     cursor.execute('''
         SELECT * FROM users WHERE username = ?
     ''', (username,))
     user = cursor.fetchone()
     conn.close()
-    return user
+    return dict(user) if user else None  
 
 def add_message(sender_id, message):
     conn = sqlite3.connect('velocity.db')

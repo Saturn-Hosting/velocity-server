@@ -13,5 +13,5 @@ class RegisterCommand(Command):
             db.add_user(username, password)
             client.send("CONFIRM_REGISTER\n")
             client.username = username
-            client.id = db.get_user(username).id
+            client.id = db.get_user(username)['id']
             client.logged_in = True
