@@ -7,3 +7,4 @@ with open('MOTD.txt') as f:
     config['motd'] = f.read()
 
 clients = []
+credentials = {}
