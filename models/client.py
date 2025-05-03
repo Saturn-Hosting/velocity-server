@@ -29,7 +29,7 @@ class Client:
         self.conn.close()
 
     def thread(self):
-        self.send(f"{config['motd']}\n")
+        self.send(f"{config['motd']}")
         
         while not self.logged_in:
             message = self.receive()

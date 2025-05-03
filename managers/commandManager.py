@@ -22,7 +22,7 @@ class CommandManager:
     def handle(self, client, message):
         parts = message.split()
         if not parts:
-            client.send("ERR_INVALIDCMD\n")
+            client.send("ERR_INVALIDCMD")
             return
 
         cmd_name = parts[0].upper()
@@ -31,9 +31,9 @@ class CommandManager:
         command = self.commands.get(cmd_name)
         if command:
             if len(args) != command.desired_args and command.desired_args != -1:
-                if(len(args) > command.desired_args): client.send("ERR_TOOMANYPARAMS\n")
-                else: client.send("ERR_NEEDMOREPARAMS\n")
+                if(len(args) > command.desired_args): client.send("ERR_TOOMANYPARAMS")
+                else: client.send("ERR_NEEDMOREPARAMS")
                 return
             else: command.execute(client, args)
         else:
-            client.send("ERR_INVALIDCMD\n")
+            client.send("ERR_INVALIDCMD")

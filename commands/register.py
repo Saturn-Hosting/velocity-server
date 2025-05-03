@@ -8,10 +8,10 @@ class RegisterCommand(Command):
         username, password = args
         user = db.get_user(username)
         if user:
-            client.send("ERR_ALREADYREGISTRED\n")
+            client.send("ERR_ALREADYREGISTRED")
         else:
             db.add_user(username, password)
-            client.send("CONFIRM_REGISTER\n")
+            client.send("CONFIRM_REGISTER")
             client.username = username
             client.id = db.get_user(username)['id']
             client.logged_in = True
