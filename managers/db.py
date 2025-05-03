@@ -79,7 +79,7 @@ def add_private_message(sender_id, receiver_id, message):
 def verify_password(username, password):
     user = get_user(username)
     if user:
-        stored_password = user[2]
+        stored_password = user['password']
         return bcrypt.checkpw(password.encode('utf-8'), stored_password)
     return False
 

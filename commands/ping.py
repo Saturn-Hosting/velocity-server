@@ -1,4 +1,3 @@
-from managers.config import credentials, clients
 from .command import Command
 from managers.clientUtils import *
 

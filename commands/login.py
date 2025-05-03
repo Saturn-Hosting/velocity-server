@@ -1,4 +1,3 @@
-from managers.config import credentials
 from .command import Command
 import managers.db as db
 
@@ -20,4 +19,4 @@ class LoginCommand(Command):
             client.username = username
             client.send("CONFIRM_LOGIN\n")
             client.logged_in = True
-            client.id = user.id
+            client.id = user['id']
