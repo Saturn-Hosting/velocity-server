@@ -1,5 +1,5 @@
-# Velocity Server
-Velocity is a simple socket-based chat.
+# Velocity
+A simple socket-based chat software for private & transparent communication.
 
 ## Docs
-Check [PROTOCOL.md](docs/PROTOCOL.md)
+Check [here](https://velocity.lat/protocol).
