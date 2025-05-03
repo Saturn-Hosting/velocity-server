@@ -2,4 +2,4 @@
 A simple socket-based chat software for private & transparent communication.
 
 ## Docs
-Check [here](https://velocity.lat/protocol).
+The protocol documentation is available [here](https://velocity.lat/protocol).
